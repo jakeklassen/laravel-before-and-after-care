@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\Hello;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [Hello::class, 'index']);
 
 Route::get('/auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();
