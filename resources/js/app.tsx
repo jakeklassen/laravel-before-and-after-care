@@ -2,6 +2,7 @@ import { createInertiaApp } from "@inertiajs/react";
 import React from "react";
 import { Container, createRoot } from "react-dom/client";
 import "../css/app.css";
+import { Layout } from "./Layout.tsx";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 createInertiaApp({
@@ -11,7 +12,14 @@ createInertiaApp({
       eager: true,
     });
 
-    return pages[`./Pages/${name}.tsx`];
+    const page = pages[`./Pages/${name}.tsx`];
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (page as any).default.layout ??= (page: React.ReactNode) => (
+      <Layout isAuthenticated={false}>{page}</Layout>
+    );
+
+    return page;
   },
   setup({
     el,
