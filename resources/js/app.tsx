@@ -16,7 +16,7 @@ createInertiaApp({
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (page as any).default.layout ??= (page: React.ReactNode) => (
-      <Layout isAuthenticated={false}>{page}</Layout>
+      <Layout>{page}</Layout>
     );
 
     return page;

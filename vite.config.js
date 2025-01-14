@@ -4,11 +4,11 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [
-    react(),
     laravel({
-      input: ["resources/js/app.js"],
+      input: ["resources/js/app.tsx"],
       refresh: true,
     }),
+    react(),
   ],
   resolve: (name) => {
     const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });

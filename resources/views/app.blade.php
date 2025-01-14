@@ -7,6 +7,11 @@
     @viteReactRefresh
     @vite('resources/js/app.tsx')
     @inertiaHead
+    <style type="text/css">
+      @view-transition {
+        navigation: auto;
+      }
+    </style>
   </head>
   <body class="dark:bg-black">
     @inertia
