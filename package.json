@@ -28,8 +28,14 @@
         "@inertiajs/core": "^2.0.1",
         "@inertiajs/react": "^2.0.1",
         "@vitejs/plugin-react": "^4.3.4",
+        "clsx": "^2.1.1",
+        "date-fns": "^4.1.0",
+        "date-fns-tz": "^3.2.0",
+        "just-is-empty": "^3.4.1",
         "lucide-react": "^0.471.1",
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "react-infinite-scroll-component": "^6.1.0",
+        "type-fest": "^4.32.0"
     }
 }
