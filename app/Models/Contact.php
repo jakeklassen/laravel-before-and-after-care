@@ -4,9 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
+#[TypeScript]
 class Contact extends Model
 {
+    protected $table = 'dependant_contacts';
+
+    public string $name;
+    public string $email;
+    public ?string $phone = null;
+    public string $relationship;
+
     protected $fillable = [
         'dependant_id',
         'name',

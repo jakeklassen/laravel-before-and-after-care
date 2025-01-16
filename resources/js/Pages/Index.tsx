@@ -105,6 +105,8 @@ const Calendar: React.FC = () => {
     dependants: DependantsResponse[];
   }>().props;
 
+  console.log(dependants);
+
   const [displayDays, setDisplayDays] = useState<Date[]>(() => {
     // const start = startOfMonth(new Date());
     // const end = endOfMonth(new Date());
@@ -234,7 +236,7 @@ const Calendar: React.FC = () => {
   };
 
   const renderDay = (day: Date) => {
-    const scheduledChildren = getScheduledChildren(day);
+    const scheduledDependants = getScheduledChildren(day);
 
     const dayOfWeek = format(day, "EEEE").toLowerCase() as WeekDay;
 
@@ -251,20 +253,20 @@ const Calendar: React.FC = () => {
             {format(day, "EEEE, MMMM d")}
           </h3>
         </div>
-        {scheduledChildren.length > 0 ? (
+        {scheduledDependants.length > 0 ? (
           <>
             <ul className="divide-y divide-gray-700">
-              {scheduledChildren.map((child) => {
+              {scheduledDependants.map((dependant) => {
                 const yyyyMMdd = format(day, "yyyy-MM-dd");
 
                 const daySchedule =
-                  child.schedules.findLast(
+                  dependant.schedules.findLast(
                     (schedule) =>
                       isSameDay(yyyyMMdd, schedule.start_date) ||
                       isAfter(yyyyMMdd, schedule.start_date),
                   ) ?? null;
 
-                const attendance = child.attendance.find((attendance) => {
+                const attendance = dependant.attendance.find((attendance) => {
                   return isSameDay(attendance.date, yyyyMMdd);
                 });
 
@@ -274,11 +276,11 @@ const Calendar: React.FC = () => {
                   ? null
                   : attendance?.when ?? daySchedule?.[dayOfWeek];
 
-                const sumToDate = calculateWeekSum(child, day);
+                const sumToDate = calculateWeekSum(dependant, day);
 
                 return (
                   <li
-                    key={`${day.toISOString()}-${child.id}`}
+                    key={`${day.toISOString()}-${dependant.id}`}
                     className="px-4 py-3 flex items-center place-content-between"
                   >
                     <div className="flex">
@@ -289,7 +291,7 @@ const Calendar: React.FC = () => {
                           attendance?.status === "absent" ? "line-through" : "",
                         )}
                       >
-                        {child.name}
+                        {dependant.name}
                       </span>
                     </div>
 
@@ -302,7 +304,7 @@ const Calendar: React.FC = () => {
                         // disabled={isPending || isError}
                         initialWhen={initialWhen}
                         onToggleHandler={(when) =>
-                          handleToggleAttendance(child, yyyyMMdd, when)
+                          handleToggleAttendance(dependant, yyyyMMdd, when)
                         }
                       />
                     </div>

@@ -1,11 +1,14 @@
-import { Head, Link } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { isBefore, isSameDay } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
 import { Edit } from "lucide-react";
 import React from "react";
 
 const ManageDependants: React.FC = () => {
-  const data: any[] = [];
+  const { dependants } = usePage<{ dependants: App.Data.DependantData[] }>()
+    .props;
+
+  console.log(dependants);
 
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const today = toZonedTime(new Date(), timeZone);
@@ -29,40 +32,40 @@ const ManageDependants: React.FC = () => {
           </Link>
         </div>
         <ul className="divide-y divide-gray-700">
-          {data.map((child) => {
-            const rate = child.expand?.rates?.find((rate: any) => {
-              const startDate = toZonedTime(rate.startDate, timeZone);
+          {dependants.map((dependant) => {
+            const rate = dependant.rates?.find((rate) => {
+              const startDate = toZonedTime(rate.start_date, timeZone);
 
               return isBefore(startDate, today) || isSameDay(startDate, today);
             });
 
             return (
               <li
-                key={child.id}
+                key={dependant.id}
                 className="px-4 py-4 sm:px-6 hover:bg-gray-700"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
                     <p
                       className={`text-sm font-medium ${
-                        child.isActive ? "text-gray-100" : "text-gray-400"
+                        dependant.is_active ? "text-gray-100" : "text-gray-400"
                       }`}
                     >
-                      {child.name}
+                      {dependant.name}
                     </p>
                     <span
                       className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                        child.isActive
+                        dependant.is_active
                           ? "bg-green-100 text-green-800"
                           : "bg-red-100 text-red-800"
                       }`}
                     >
-                      {child.isActive ? "Active" : "Inactive"}
+                      {dependant.is_active ? "Active" : "Inactive"}
                     </span>
                   </div>
                   <div className="flex items-center space-x-4">
                     <Link
-                      href={`/edit-child/${child.id}`}
+                      href={`/edit-child/${dependant.id}`}
                       className="text-gray-400 hover:text-gray-100 focus:outline-none"
                       title="Edit Child"
                     >
@@ -71,11 +74,11 @@ const ManageDependants: React.FC = () => {
                   </div>
                 </div>
                 <div className="mt-2 text-sm text-gray-500">
-                  Daily Rate: ${rate?.dailyRate}
+                  Daily Rate: ${rate?.daily_rate}
                 </div>
 
                 <div className="mt-2 text-sm text-gray-500">
-                  Half Day Rate: ${rate?.halfDayRate}
+                  Half Day Rate: ${rate?.half_day_rate}
                 </div>
               </li>
             );

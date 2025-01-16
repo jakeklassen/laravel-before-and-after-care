@@ -2,11 +2,20 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 
+#[TypeScript]
 class Rate extends Model
 {
+    protected $table = 'dependant_rates';
+
+    public float $daily_rate;
+    public float $half_day_rate;
+    public CarbonImmutable $start_date;
+
     protected $fillable = [
         'dependant_id',
         'daily_rate',

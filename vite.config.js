@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
   ],
   resolve: (name) => {
-    const pages = import.meta.glob("./pages/**/*.jsx", { eager: true });
-    return pages[`./pages/${name}.jsx`];
+    const pages = import.meta.glob("./Pages/**/*.jsx", { eager: true });
+    return pages[`./Pages/${name}.jsx`];
   },
 });

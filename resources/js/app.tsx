@@ -8,11 +8,11 @@ import { Layout } from "./Layout.tsx";
 createInertiaApp({
   id: "app",
   resolve: (name: string) => {
-    const pages = import.meta.glob("./pages/**/*.tsx", {
+    const pages = import.meta.glob("./Pages/**/*.tsx", {
       eager: true,
     });
 
-    const page = pages[`./pages/${name}.tsx`];
+    const page = pages[`./Pages/${name}.tsx`];
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (page as any).default.layout ??= (page: React.ReactNode) => (

@@ -24,9 +24,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 <CalendarIcon className="h-6 w-6" />
               </Link>
               <Link
-                href="/manage-children"
+                href="/manage-dependants"
                 className="text-indigo-400 hover:text-indigo-300"
-                title="Manage Children"
+                title="Manage Dependants"
               >
                 <Users className="h-6 w-6" />
               </Link>

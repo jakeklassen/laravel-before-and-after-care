@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\DependantData;
 use App\Models\Dependant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,8 +19,15 @@ class DependantController extends Controller
         /** @var User */
         $user = Auth::user();
 
+        $dependants = DependantData::collect(
+            Dependant::query()
+                ->where('user_id', $user->id)
+                ->with(['schedules', 'rates'])
+                ->get()
+        );
+
         return Inertia::render('ManageDependants', [
-            'dependants' => fn() => $user->dependants()->get(),
+            'dependants' => fn() => $dependants,
         ]);
     }
 

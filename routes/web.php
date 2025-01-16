@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DependantController;
 use App\Http\Controllers\HomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,8 @@ Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/manage-dependants', [DependantController::class, 'index'])->middleware('auth');
 
 Route::get('/auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();
