@@ -61,7 +61,7 @@ return [
         Spatie\LaravelData\RuleInferrers\NullableRuleInferrer::class,
         Spatie\LaravelData\RuleInferrers\RequiredRuleInferrer::class,
         Spatie\LaravelData\RuleInferrers\BuiltInTypesRuleInferrer::class,
-        Spatie\LaravelData\RuleInferrers\AttributesRuleInferrer::class,
+        Spatie\LaravelData\RuleInferrers\AttributesRuleInferrer::class
     ],
 
     /**

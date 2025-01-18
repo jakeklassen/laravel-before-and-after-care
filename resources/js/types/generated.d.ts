@@ -1,10 +1,49 @@
+declare namespace App {
+  export type DependantRelationship = "guardian" | "relative" | "other";
+  export type ScheduleDay = "am" | "pm" | "day";
+}
 declare namespace App.Data {
-  export type DependantData = {
+  export type ContactData = {
     id: number;
     name: string;
+    email: string | null;
+    phone: string | null;
+  };
+  export type CreateContactData = {
+    name: string;
+    relationship: App.DependantRelationship;
+    email: string | null;
+    phone: string | null;
+  };
+  export type CreateDependantData = {
+    name: string;
     is_active: boolean;
-    schedules: Array<App.Data.ScheduleData>;
+    rates: Array<App.Data.CreateRateData>;
+    schedules: Array<App.Data.CreateScheduleData>;
+    contacts: Array<App.Data.CreateContactData>;
+  };
+  export type CreateRateData = {
+    daily_rate: number;
+    half_day_rate: number;
+    start_date: string;
+  };
+  export type CreateScheduleData = {
+    start_date: string;
+    sunday: App.ScheduleDay | null;
+    monday: App.ScheduleDay | null;
+    tuesday: App.ScheduleDay | null;
+    wednesday: App.ScheduleDay | null;
+    thursday: App.ScheduleDay | null;
+    friday: App.ScheduleDay | null;
+    saturday: App.ScheduleDay | null;
+  };
+  export type DependantData = {
+    id: number | null;
+    name: string;
+    is_active: boolean;
+    contacts: Array<App.Data.ContactData>;
     rates: Array<App.Data.RateData>;
+    schedules: Array<App.Data.ScheduleData>;
   };
   export type RateData = {
     id: number;
@@ -14,13 +53,13 @@ declare namespace App.Data {
   };
   export type ScheduleData = {
     id: number;
-    sunday: string;
-    monday: string;
-    tuesday: string;
-    wednesday: string;
-    thursday: string;
-    friday: string;
-    saturday: string;
+    sunday: string | null;
+    monday: string | null;
+    tuesday: string | null;
+    wednesday: string | null;
+    thursday: string | null;
+    friday: string | null;
+    saturday: string | null;
     start_date: string;
   };
 }

@@ -15,6 +15,8 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/manage-dependants', [DependantController::class, 'index'])->middleware('auth');
+Route::get('/add-dependant', [DependantController::class, 'create'])->middleware('auth');
+Route::post('/add-dependant', [DependantController::class, 'store'])->middleware('auth');
 
 Route::get('/auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();

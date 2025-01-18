@@ -8,8 +8,6 @@ const ManageDependants: React.FC = () => {
   const { dependants } = usePage<{ dependants: App.Data.DependantData[] }>()
     .props;
 
-  console.log(dependants);
-
   const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const today = toZonedTime(new Date(), timeZone);
 
@@ -25,7 +23,7 @@ const ManageDependants: React.FC = () => {
             Manage Children
           </h3>
           <Link
-            href="/add-child"
+            href="/add-dependant"
             className="px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
             Add New Child
@@ -65,7 +63,7 @@ const ManageDependants: React.FC = () => {
                   </div>
                   <div className="flex items-center space-x-4">
                     <Link
-                      href={`/edit-child/${dependant.id}`}
+                      href={`/edit-dependant/${dependant.id}`}
                       className="text-gray-400 hover:text-gray-100 focus:outline-none"
                       title="Edit Child"
                     >

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Data\CreateDependantData;
 use App\Data\DependantData;
 use App\Models\Dependant;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class DependantController extends Controller
@@ -21,7 +23,7 @@ class DependantController extends Controller
 
         $dependants = DependantData::collect(
             Dependant::query()
-                ->where('user_id', $user->id)
+                ->where('user_id', $user->getKey())
                 ->with(['schedules', 'rates'])
                 ->get()
         );
@@ -36,15 +38,37 @@ class DependantController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('AddDependant');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateDependantData $request)
     {
-        //
+        $data = $request->toArray();
+        list('contacts' => $contacts, 'rates' => $rates, 'schedules' => $schedules) = $data;
+
+        DB::beginTransaction();
+
+        try {
+            $dependant = Dependant::create([
+                'user_id' => Auth::id(),
+                'name' => $data['name'],
+                'is_active' => $data['is_active'],
+            ]);
+
+            $dependant->contacts()->createMany($contacts);
+            $dependant->rates()->createMany($rates);
+            $dependant->schedules()->createMany($schedules);
+
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();
+            throw $e;
+        }
+
+        return redirect('/manage-dependants');
     }
 
     /**

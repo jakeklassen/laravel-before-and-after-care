@@ -6,9 +6,9 @@
         "dev": "vite"
     },
     "devDependencies": {
-        "@tsslint/cli": "^1.5.6",
-        "@tsslint/config": "^1.5.6",
-        "@tsslint/eslint": "^1.5.6",
+        "@tsslint/cli": "^1.5.8",
+        "@tsslint/config": "^1.5.8",
+        "@tsslint/eslint": "^1.5.8",
         "@types/react": "^19.0.7",
         "@types/react-dom": "^19.0.2",
         "@typescript-eslint/eslint-plugin": "^8.20.0",
@@ -25,14 +25,14 @@
         "vite": "^6.0.7"
     },
     "dependencies": {
-        "@inertiajs/core": "^2.0.1",
-        "@inertiajs/react": "^2.0.1",
+        "@inertiajs/core": "^2.0.2",
+        "@inertiajs/react": "^2.0.2",
         "@vitejs/plugin-react": "^4.3.4",
         "clsx": "^2.1.1",
         "date-fns": "^4.1.0",
         "date-fns-tz": "^3.2.0",
         "just-is-empty": "^3.4.1",
-        "lucide-react": "^0.471.1",
+        "lucide-react": "^0.473.0",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-infinite-scroll-component": "^6.1.0",

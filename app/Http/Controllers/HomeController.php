@@ -15,7 +15,7 @@ class HomeController extends Controller
 
         return Inertia::render('Index', [
             'dependants' => fn() => $user->dependants()
-                ->with(['schedules', 'rates', 'contacts'])->get(),
+                ->with(['attendance', 'contacts', 'rates', 'schedules'])->get(),
         ]);
     }
 }
