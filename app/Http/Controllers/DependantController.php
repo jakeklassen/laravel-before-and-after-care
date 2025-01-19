@@ -47,15 +47,16 @@ class DependantController extends Controller
     public function store(CreateDependantData $request)
     {
         $data = $request->toArray();
-        list('contacts' => $contacts, 'rates' => $rates, 'schedules' => $schedules) = $data;
+        list('name' => $name, 'is_active' => $is_active, 'contacts' => $contacts, 'rates' => $rates, 'schedules' => $schedules) = $data;
 
         DB::beginTransaction();
 
         try {
+            /** @var Dependant */
             $dependant = Dependant::create([
                 'user_id' => Auth::id(),
-                'name' => $data['name'],
-                'is_active' => $data['is_active'],
+                'name' => $name,
+                'is_active' => $is_active,
             ]);
 
             $dependant->contacts()->createMany($contacts);

@@ -30,7 +30,7 @@ class Rate extends Model
     ];
 
     /**
-     * Get the dependant that owns the rate.
+     * @return BelongsTo<Dependant, $this>
      */
     public function dependant(): BelongsTo
     {

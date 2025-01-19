@@ -161,7 +161,9 @@ const AddDependantForm: React.FC = () => {
       onSubmit={handleSubmit}
       className="space-y-8 bg-gray-800 shadow rounded-lg p-8"
     >
-      <h2 className="text-2xl font-bold text-gray-100 mb-6">Add New Child</h2>
+      <h2 className="text-2xl font-bold text-gray-100 mb-6">
+        Add New Dependant
+      </h2>
       <div className="space-y-6 mx-2 sm:mx-0">
         <div>
           <label

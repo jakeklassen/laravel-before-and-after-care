@@ -28,7 +28,7 @@ class Schedule extends Model
     ];
 
     /**
-     * Get the dependant that owns the schedule.
+     * @return BelongsTo<Dependant, $this>
      */
     public function dependant(): BelongsTo
     {

@@ -34,7 +34,8 @@ class Contact extends Model
     ];
 
     /**
-     * Get the dependant that owns the contact.
+     * 
+     * @return BelongsTo<Dependant, $this>
      */
     public function dependant(): BelongsTo
     {

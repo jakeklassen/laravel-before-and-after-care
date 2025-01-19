@@ -24,7 +24,7 @@ class Dependant extends Model
     ];
 
     /**
-     * Get the user that owns the dependant.
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {
@@ -32,7 +32,7 @@ class Dependant extends Model
     }
 
     /**
-     * Get the schedules for the dependant.
+     * @return HasMany<Schedule, $this>
      */
     public function schedules(): HasMany
     {
@@ -40,7 +40,7 @@ class Dependant extends Model
     }
 
     /**
-     * Get the attendance for the dependant.
+     * @return HasMany<Attendance, $this>
      */
     public function attendance(): HasMany
     {
@@ -49,7 +49,7 @@ class Dependant extends Model
 
 
     /**
-     * Get the rates for the dependant.
+     * @return HasMany<Rate, $this>
      */
     public function rates(): HasMany
     {
@@ -57,28 +57,10 @@ class Dependant extends Model
     }
 
     /**
-     * Get the contacts for the dependant.
+     * @return HasMany<Contact, $this>
      */
     public function contacts(): HasMany
     {
         return $this->hasMany(Contact::class);
-    }
-
-    /**
-     * Get the latest schedule for the dependant.
-     */
-    public function latestSchedule(): BelongsTo
-    {
-        return $this->belongsTo(Schedule::class)
-            ->latestOfMany('start_date');
-    }
-
-    /**
-     * Get the latest rate for the dependant.
-     */
-    public function latestRate(): BelongsTo
-    {
-        return $this->belongsTo(Rate::class)
-            ->latestOfMany('start_date');
     }
 }

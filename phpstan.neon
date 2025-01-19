@@ -1,0 +1,16 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+    level: 8
+    noModelMake: false
+    ignoreErrors:
+        -
+            identifier: missingType.return
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - tests
