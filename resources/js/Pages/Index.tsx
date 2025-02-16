@@ -40,8 +40,10 @@ type DependantsResponse = {
     when: NonNullable<AttendanceWhenOptions>;
   }[];
   rates: {
-    daily_rate: number;
-    half_day_rate: number;
+    // Laravel decimal casting will return a string
+    daily_rate: string;
+    // Laravel decimal casting will return a string
+    half_day_rate: string;
     start_date: string;
   }[];
   schedules: {
@@ -93,7 +95,9 @@ function calculateWeekSum(child: DependantsResponse, upTo: Date) {
 
     return (
       acc +
-      (isFullDay ? dayRates?.daily_rate ?? 0 : dayRates?.half_day_rate ?? 0)
+      (isFullDay
+        ? parseFloat(dayRates?.daily_rate ?? "0")
+        : parseFloat(dayRates?.half_day_rate ?? "0"))
     );
   }, 0);
 

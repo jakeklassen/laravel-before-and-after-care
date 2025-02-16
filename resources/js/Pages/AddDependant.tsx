@@ -44,43 +44,35 @@ const AddDependantForm: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    router.post(
-      "/add-dependant",
-      {
-        name,
-        is_active: true,
-        contacts: contacts.map((contact) => ({
-          name: contact.name,
-          phone: contact.phone,
-          email: contact.email,
-          relationship: contact.relationship,
-        })),
-        rates: [
-          {
-            daily_rate: dailyRate,
-            half_day_rate: halfDayRate,
-            start_date: startDate,
-          },
-        ],
-        schedules: [
-          {
-            start_date: startDate,
-            sunday: schedule.sunday,
-            monday: schedule.monday,
-            tuesday: schedule.tuesday,
-            wednesday: schedule.wednesday,
-            thursday: schedule.thursday,
-            friday: schedule.friday,
-            saturday: schedule.saturday,
-          },
-        ],
-      },
-      {
-        headers: {
-          XDEBUG_SESSION: "VSCODE",
+    router.post("/add-dependant", {
+      name,
+      is_active: true,
+      contacts: contacts.map((contact) => ({
+        name: contact.name,
+        phone: contact.phone,
+        email: contact.email,
+        relationship: contact.relationship,
+      })),
+      rates: [
+        {
+          daily_rate: dailyRate,
+          half_day_rate: halfDayRate,
+          start_date: startDate,
         },
-      },
-    );
+      ],
+      schedules: [
+        {
+          start_date: startDate,
+          sunday: schedule.sunday,
+          monday: schedule.monday,
+          tuesday: schedule.tuesday,
+          wednesday: schedule.wednesday,
+          thursday: schedule.thursday,
+          friday: schedule.friday,
+          saturday: schedule.saturday,
+        },
+      ],
+    });
   };
 
   const handleScheduleChange = (day: keyof Schedule, period: DaySchedule) => {

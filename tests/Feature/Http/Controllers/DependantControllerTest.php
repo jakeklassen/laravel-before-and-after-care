@@ -1,7 +1,9 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use function Pest\Laravel\{get};
 
-    $response->assertStatus(200);
+test('example', function () {
+    $response = get('/');
+
+    $response->assertStatus(302);
 });

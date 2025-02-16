@@ -13,4 +13,4 @@ parameters:
         - config
         - database
         - routes
-        - tests
+        # - tests

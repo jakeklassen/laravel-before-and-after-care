@@ -6,7 +6,6 @@ use App\Http\Controllers\HomeController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 use Laravel\Socialite\Facades\Socialite;
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth');
@@ -23,6 +22,7 @@ Route::get('/auth/google/redirect', function () {
 });
 
 Route::get('/auth/google/callback', function () {
+    /** @var \Laravel\Socialite\Two\User */
     $user = Socialite::driver('google')->user();
 
     $user = User::updateOrCreate([
