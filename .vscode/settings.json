@@ -1,5 +1,5 @@
 {
-  "Laravel.phpCommand": "$HOME/.local/share/mise/installs/php/8.4.1/bin/php",
+  "Laravel.phpCommand": "$HOME/.local/share/mise/installs/php/8.4.4/bin/php",
   "phpstan.singleFileMode": false,
   "phpstan.binPath": "vendor/bin/phpstan",
   "phpstan.binCommand": [],

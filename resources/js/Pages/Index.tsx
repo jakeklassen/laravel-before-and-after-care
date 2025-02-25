@@ -17,7 +17,7 @@ import {
 import { toZonedTime } from "date-fns-tz";
 import isEmpty from "just-is-empty";
 import { CalendarIcon, User } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ScheduleButtonGroup } from "../components/ScheduleButtonGroup";
 import { AttendanceWhenOptions } from "../modules/attendance/attendance";
@@ -141,6 +141,10 @@ const Calendar: React.FC = () => {
 
     todayElement?.scrollIntoView({ behavior, block: "start" });
   };
+
+  useEffect(() => {
+    scrollToToday("instant");
+  }, []);
 
   const handleToggleAttendance = (
     dependant: (typeof dependants)[number],
