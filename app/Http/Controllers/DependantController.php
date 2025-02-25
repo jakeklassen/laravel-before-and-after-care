@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 
 class DependantController extends Controller
@@ -85,7 +86,9 @@ class DependantController extends Controller
      */
     public function edit(Dependant $dependant)
     {
-        //
+        return Inertia::render('EditDependant', [
+            'dependant' => $dependant->with(['contacts', 'rates', 'schedules'])->get()->first(),
+        ]);
     }
 
     /**
@@ -93,7 +96,9 @@ class DependantController extends Controller
      */
     public function update(Request $request, Dependant $dependant)
     {
-        //
+        Log::info($request->all());
+
+        return redirect('/manage-dependants');
     }
 
     /**

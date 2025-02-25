@@ -6,6 +6,7 @@ declare namespace App.Data {
   export type ContactData = {
     id: number;
     name: string;
+    relationship: string;
     email: string | null;
     phone: string | null;
   };

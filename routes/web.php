@@ -17,6 +17,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/manage-dependants', [DependantController::class, 'index'])->middleware('auth');
 Route::get('/add-dependant', [DependantController::class, 'create'])->middleware('auth');
 Route::post('/add-dependant', [DependantController::class, 'store'])->middleware('auth');
+Route::get('/edit-dependant/{dependant}', [DependantController::class, 'edit'])->middleware('auth');
+Route::put('/edit-dependant/{dependant}', [DependantController::class, 'update'])->middleware('auth');
 
 Route::put('/attendance', [AttendanceController::class, 'update'])->middleware('auth');
 

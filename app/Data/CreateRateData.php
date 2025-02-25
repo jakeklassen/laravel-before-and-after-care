@@ -12,14 +12,14 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class CreateRateData extends Data
 {
-  public function __construct(
-    #[Numeric]
-    public readonly float $daily_rate,
+    public function __construct(
+        #[Numeric]
+        public readonly float $daily_rate,
 
-    #[Numeric]
-    public readonly float $half_day_rate,
+        #[Numeric]
+        public readonly float $half_day_rate,
 
-    #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d')]
-    public readonly CarbonImmutable $start_date,
-  ) {}
+        #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d')]
+        public readonly CarbonImmutable $start_date,
+    ) {}
 }

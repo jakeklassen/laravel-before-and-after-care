@@ -10,12 +10,12 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 #[TypeScript]
 class CreateContactData extends Data
 {
-  public function __construct(
-    public string $name,
-    public DependantRelationship $relationship,
+    public function __construct(
+        public string $name,
+        public DependantRelationship $relationship,
 
-    #[Email]
-    public ?string $email,
-    public ?string $phone,
-  ) {}
+        #[Email]
+        public ?string $email,
+        public ?string $phone,
+    ) {}
 }

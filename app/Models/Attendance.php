@@ -27,7 +27,7 @@ class Attendance extends Model
     ];
 
     /**
-     * 
+     *
      * @return BelongsTo<Dependant, $this>
      */
     public function dependant(): BelongsTo
