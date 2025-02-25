@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DependantController;
 use App\Http\Controllers\HomeController;
@@ -16,6 +17,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/manage-dependants', [DependantController::class, 'index'])->middleware('auth');
 Route::get('/add-dependant', [DependantController::class, 'create'])->middleware('auth');
 Route::post('/add-dependant', [DependantController::class, 'store'])->middleware('auth');
+
+Route::put('/attendance', [AttendanceController::class, 'update'])->middleware('auth');
 
 Route::get('/auth/google/redirect', function () {
     return Socialite::driver('google')->redirect();

@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/core";
 import { usePage } from "@inertiajs/react";
 import clsx from "clsx";
 import {
@@ -35,6 +36,7 @@ type DependantsResponse = {
   name: string;
   is_active: boolean;
   attendance: {
+    id: number;
     date: string;
     status: "present" | "absent";
     when: NonNullable<AttendanceWhenOptions>;
@@ -140,7 +142,7 @@ const Calendar: React.FC = () => {
     todayElement?.scrollIntoView({ behavior, block: "start" });
   };
 
-  const handleToggleAttendance = async (
+  const handleToggleAttendance = (
     dependant: (typeof dependants)[number],
     date: string,
     when: AttendanceWhenOptions,
@@ -168,33 +170,23 @@ const Calendar: React.FC = () => {
       isSameDay(attendance.date, date),
     );
 
-    // // If there is an attendance record for today, delete it
-    // if (attendance != null) {
-    //   await pb.collection("dependants").update(dependant.id, {
-    //     "attendance-": [attendance.id],
-    //   });
+    const status = when === null ? "absent" : "present";
 
-    //   await pb.collection("attendance").delete(attendance.id);
-    // }
-
-    // let status = "present";
-
-    // if (when === null) {
-    //   status = "absent";
-    // }
-
-    // const attendanceResponse = await pb.collection("attendance").create({
-    //   dependant: dependant.id,
-    //   date,
-    //   status,
-    //   when: when ?? scheduleForToday,
-    // });
-
-    // await pb.collection("dependants").update(dependant.id, {
-    //   "attendance+": [attendanceResponse.id],
-    // });
-
-    // await refetch();
+    router.put(
+      "/attendance",
+      {
+        dependant_id: dependant.id,
+        date,
+        status,
+        when: when ?? scheduleForToday,
+        id: attendance?.id,
+      },
+      {
+        onError(error) {
+          console.error("Error updating attendance:", error);
+        },
+      },
+    );
   };
 
   const loadMoreDays = () => {
@@ -307,9 +299,9 @@ const Calendar: React.FC = () => {
                       <ScheduleButtonGroup
                         // disabled={isPending || isError}
                         initialWhen={initialWhen}
-                        onToggleHandler={(when) =>
-                          handleToggleAttendance(dependant, yyyyMMdd, when)
-                        }
+                        onToggleHandler={(when) => {
+                          handleToggleAttendance(dependant, yyyyMMdd, when);
+                        }}
                       />
                     </div>
                   </li>
