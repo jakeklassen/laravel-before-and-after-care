@@ -13,7 +13,11 @@ use Spatie\TypeScriptTransformer\Attributes\TypeScript;
 class CreateScheduleData extends Data
 {
     public function __construct(
-        #[WithCast(DateTimeInterfaceCast::class, format: 'Y-m-d')]
+        #[WithCast(DateTimeInterfaceCast::class, format: [
+            'Y-m-d',
+            'Y-m-d\TH:i:s.uP',
+            'Y-m-d\TH:i:s.uZ',
+        ])]
         public CarbonImmutable $start_date,
 
         public ?ScheduleDay $sunday = null,

@@ -347,7 +347,7 @@ const EditDependant: React.FC = () => {
                   contacts: [
                     ...data.contacts,
                     {
-                      id: Date.now(),
+                      id: 0,
                       name: "",
                       phone: "",
                       email: "",

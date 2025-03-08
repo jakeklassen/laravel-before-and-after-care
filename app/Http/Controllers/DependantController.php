@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Data\CreateDependantData;
 use App\Data\DependantData;
+use App\Data\UpdateDependantData;
 use App\Models\Dependant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -94,9 +95,11 @@ class DependantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dependant $dependant)
+    public function update(UpdateDependantData $request, Dependant $dependant)
     {
         Log::info($request->all());
+
+        dd(UpdateDependantData::getValidationRules($request->toArray()));
 
         return redirect('/manage-dependants');
     }
