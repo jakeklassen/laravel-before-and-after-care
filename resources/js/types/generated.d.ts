@@ -63,6 +63,11 @@ declare namespace App.Data {
     saturday: string | null;
     start_date: string;
   };
+  export type UpdateDependantData = {
+    name: string;
+    schedule: App.Data.CreateScheduleData;
+    contacts: Array<App.Data.CreateContactData>;
+  };
 }
 declare namespace App.Models {
   export type Attendance = {
